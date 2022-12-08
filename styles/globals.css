@@ -1,26 +1,29 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
 
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+@layer base {
+  html,
   body {
-    color: white;
-    background: black;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+}
+@layer components {
+  .row-menu {
+    @apply flex-col h-full absolute top-0 -right-12  hidden group-hover:flex group-hover:animate-appear rounded-xl bg-opacity-30 w-fit p-2 gap-1 z-10;
+  }
+  .row-menu__button {
+    @apply hover:bg-slate-300 bg-slate-200 rounded-2xl text-slate-600 duration-200 aspect-square px-2 border-slate-300 cursor-pointer; 
+  }
+  .cell-menu {
+    @apply flex hidden group-hover:flex absolute bottom-0 left-0  bg-opacity-30 w-fit p-1 gap-1;
+  }
+  .cell-menu__button {
+    @apply hover:bg-slate-300 p-1 rounded bg-slate-200 text-slate-600 duration-200 aspect-square border-slate-300 cursor-pointer;
   }
 }
