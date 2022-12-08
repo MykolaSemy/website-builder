@@ -11,6 +11,7 @@ export const handleAddRow = (
       color: "white",
       columns: [],
       id: getRandomId(),
+      gap: 4,
     },
   ]);
 };
@@ -31,6 +32,20 @@ export const handleChangeRowColor = (
     return prev.map((row) => {
       if (row.id === rowID) {
         return { ...row, color: e.target.value };
+      } else return row;
+    });
+  });
+};
+
+export const handleChangeRowGap = (
+  rowID: string,
+  setRows: Dispatch<SetStateAction<RowType[]>>,
+  amount: number
+) => {
+  setRows((prev) => {
+    return prev.map((row) => {
+      if (row.id === rowID) {
+        return { ...row, gap: row.gap + amount };
       } else return row;
     });
   });

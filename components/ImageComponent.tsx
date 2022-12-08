@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 interface ImageComponentProps {
   file: File;
-  cellStyle:string;
+  cellStyle: string;
 }
 
-const ImageComponent: React.FC<ImageComponentProps> = ({ file,cellStyle}) => {
+const ImageComponent: React.FC<ImageComponentProps> = ({ file, cellStyle }) => {
   const [image, setImage] = useState<any>();
 
   useEffect(() => {
@@ -14,7 +14,13 @@ const ImageComponent: React.FC<ImageComponentProps> = ({ file,cellStyle}) => {
     return () => URL.revokeObjectURL(objectURL);
   }, [file]);
 
-  return <img src={image} alt="" className={` ${cellStyle} " object-contain p-1 w-full h-full "`} />;
+  return (
+    <img
+      src={image}
+      alt=""
+      className={` ${cellStyle} " object-contain p-1 w-full h-full "`}
+    />
+  );
 };
 
 export default ImageComponent;

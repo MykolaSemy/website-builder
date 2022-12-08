@@ -1,18 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
 import { RowType } from "../services/interfaces";
 import Row from "./Row";
 
 interface RowsListProps {
   rows: RowType[];
-  setRows: Dispatch<SetStateAction<RowType[]>>;
-  handleOpenSettingsModal: (rowId?: string, cellId?: string) => void;
+  handleSelectActive: (rowId?: string, cellId?: string) => void;
 }
 
-const RowsList: React.FC<RowsListProps> = ({
-  rows,
-  setRows,
-  handleOpenSettingsModal,
-}) => {
+const RowsList: React.FC<RowsListProps> = ({ rows, handleSelectActive }) => {
   if (!!!rows.length)
     return (
       <h1 className="text-blue-700">Add rows by clicking the button above!</h1>
@@ -23,8 +17,7 @@ const RowsList: React.FC<RowsListProps> = ({
         <Row
           rowData={row}
           key={row.id}
-          setRows={setRows}
-          handleOpenSettingsModal={handleOpenSettingsModal}
+          handleSelectActive={handleSelectActive}
         />
       ))}
     </div>

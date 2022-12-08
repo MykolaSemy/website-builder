@@ -1,47 +1,74 @@
-import { Dispatch, RefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { BiColorFill } from "react-icons/bi";
-import { MdAdd } from "react-icons/md";
+import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl";
 import { RiDeleteBinFill } from "react-icons/ri";
-import { RowType } from "../services/interfaces";
+import { ActiveCellType, RowType } from "../services/interfaces";
 import { handleAddCell } from "../utils/cellFunctions";
-import { handleDeleteRow, handleChangeRowColor } from "../utils/rowFunctions";
+import {
+  handleDeleteRow,
+  handleChangeRowColor,
+  handleChangeRowGap,
+} from "../utils/rowFunctions";
+import { GrChapterAdd } from "react-icons/gr";
 
 interface RowMenuProps {
   setRows: Dispatch<SetStateAction<RowType[]>>;
-  inputColorRef: RefObject<HTMLInputElement>;
-  rowData: RowType;
+  activeCell: ActiveCellType;
+  handleSelectActive: (rowId?: string, cellId?: string) => void;
 }
-
 const RowMenu: React.FC<RowMenuProps> = ({
-  inputColorRef,
-  rowData,
+  activeCell,
   setRows,
+  handleSelectActive,
 }) => {
-  const { id } = rowData;
+  const inputColorRef = useRef<HTMLInputElement>(null);
+
+  const { row } = activeCell;
   return (
     <div className="row-menu">
       <button
-        onClick={() => handleAddCell(id, setRows)}
-        className="row-menu__button"
+        onClick={() => handleAddCell(row, setRows)}
+        className="menu-button"
       >
-        <MdAdd />
+        <GrChapterAdd />
       </button>
       <button
-        onClick={() => handleDeleteRow(id, setRows)}
-        className="row-menu__button"
+        onClick={() => {
+          handleDeleteRow(row, setRows);
+          handleSelectActive();
+        }}
+        className="menu-button"
       >
         <RiDeleteBinFill />
       </button>
-      <button className="row-menu__button relative">
-        <BiColorFill onClick={() => inputColorRef.current?.click()} />
+
+      <button
+        className="menu-button relative"
+        onClick={() => inputColorRef.current?.click()}
+      >
+        <BiColorFill />
         <input
           ref={inputColorRef}
           type="color"
           name=""
           id=""
           className="absolute opacity-0 w-full top-0 left-0"
-          onChange={(e) => handleChangeRowColor(id, setRows, e)}
+          onChange={(e) => handleChangeRowColor(row, setRows, e)}
         />
+      </button>
+
+      <button
+        className="menu-button "
+        onClick={() => handleChangeRowGap(row, setRows, 5)}
+      >
+        <SlSizeFullscreen />
+      </button>
+
+      <button
+        className="menu-button "
+        onClick={() => handleChangeRowGap(row, setRows, -5)}
+      >
+        <SlSizeActual />
       </button>
     </div>
   );

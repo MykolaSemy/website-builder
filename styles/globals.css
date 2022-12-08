@@ -15,15 +15,18 @@
 }
 @layer components {
   .row-menu {
-    @apply flex-col h-full absolute top-0 -right-12  hidden group-hover:flex group-hover:animate-appear rounded-xl bg-opacity-30 w-fit p-2 gap-1 z-10;
-  }
-  .row-menu__button {
-    @apply hover:bg-slate-300 bg-slate-200 rounded-2xl text-slate-600 duration-200 aspect-square px-2 border-slate-300 cursor-pointer; 
+    @apply flex justify-start items-center bg-opacity-30 h-full w-full gap-5;
   }
   .cell-menu {
-    @apply flex hidden group-hover:flex absolute bottom-0 left-0  bg-opacity-30 w-fit p-1 gap-1;
+    @apply flex  justify-end items-center bg-opacity-30 h-full w-full gap-5;
   }
-  .cell-menu__button {
-    @apply hover:bg-slate-300 p-1 rounded bg-slate-200 text-slate-600 duration-200 aspect-square border-slate-300 cursor-pointer;
+  .menu-button {
+    @apply hover:bg-slate-300 my-3 p-2 rounded bg-slate-200 text-slate-600 duration-200 aspect-square border-slate-300 cursor-pointer;
+  }
+  .add-button {
+    @apply text-white bg-blue-600 h-full whitespace-nowrap w-fit font-light text-xl px-4 rounded my-4 border-2 border-blue-600 hover:bg-transparent hover:text-blue-600 duration-200 ease-in-out;
+  }
+  .panel {
+    @apply flex w-full h-14 shadow-md justify-center items-center px-4 my-3 py-1 gap-4 bg-slate-100;
   }
 }

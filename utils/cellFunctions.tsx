@@ -14,7 +14,13 @@ export const handleAddCell = (
           ...row,
           columns: [
             ...row.columns,
-            { id: getRandomId(), content: undefined, size: "0", style: "" },
+            {
+              id: getRandomId(),
+              content: undefined,
+              size: "0",
+              style: "",
+              color: "white",
+            },
           ],
         };
       } else return row;
@@ -65,85 +71,112 @@ export const handleChangeCellStyle = (
   });
 };
 
-export const handleAddContent = (
+export const handleChangeCellColor = (
+  setRows: Dispatch<SetStateAction<RowType[]>>,
   rowId: string,
   cellId: string,
-  setRows: Dispatch<SetStateAction<RowType[]>>,
-  contentType: string,
-  event?: React.ChangeEvent<HTMLInputElement>
-): any => {
-  switch (contentType) {
-    case "text":
-      const text = prompt("Enter text for the cell!");
-      setRows((prev) => {
-        return prev.map((row) => {
-          if (row.id === rowId) {
-            return {
-              ...row,
-              columns: row.columns.map((cell) =>
-                cell.id === cellId ? { ...cell, content: text } : cell
-              ),
-            };
-          } else {
-            return row;
-          }
-        });
-      });
-      break;
-    case "image":
-      const file: any = event?.target?.files;
-      file &&
-        setRows((prev) => {
-          return prev.map((row) => {
-            if (row.id === rowId) {
-              return {
-                ...row,
-                columns: row.columns.map((cell) => {
-                  if (cell.id === cellId) {
-                    return {
-                      ...cell,
-                      content: (
-                        <ImageComponent file={file[0]} cellStyle={cell.style} />
-                      ),
-                    };
-                  } else return cell;
-                }),
-              };
-            } else {
-              return row;
-            }
-          });
-        });
-      break;
-    case "button":
-      setRows((prev) => {
-        return prev.map((row) => {
-          if (row.id === rowId) {
-            return {
-              ...row,
-              columns: row.columns.map((cell) =>
-                cell.id === cellId
-                  ? {
-                      ...cell,
-                      content: (
-                        <button
-                          className={` ${cell.style} " bg-black rounded h-full w-full text-white rouneded py-2 px-4 cursor-pointer "`}
-                        >
-                          Button
-                        </button>
-                      ),
-                    }
-                  : cell
-              ),
-            };
-          } else {
-            return row;
-          }
-        });
-      });
-      break;
+  cellColor: string
+) => {
+  setRows((prev) => {
+    return prev.map((row) => {
+      if (row.id === rowId) {
+        return {
+          ...row,
+          columns: row.columns.map((cell) => {
+            if (cell.id === cellId) {
+              return { ...cell, color: cellColor };
+            } else return cell;
+          }),
+        };
+      } else {
+        return row;
+      }
+    });
+  });
+};
 
-    default:
-      break;
-  }
+export const addContentHandlers = {
+  handleAddText: (
+    setRows: Dispatch<SetStateAction<RowType[]>>,
+    rowId: string,
+    cellId: string,
+    data: string
+  ) => {
+    setRows((prev) => {
+      return prev.map((row) => {
+        if (row.id === rowId) {
+          return {
+            ...row,
+            columns: row.columns.map((cell) =>
+              cell.id === cellId ? { ...cell, content: data } : cell
+            ),
+          };
+        } else {
+          return row;
+        }
+      });
+    });
+  },
+  handleAddButton: (
+    setRows: Dispatch<SetStateAction<RowType[]>>,
+    rowId: string,
+    cellId: string
+  ) => {
+    setRows((prev) => {
+      return prev.map((row) => {
+        if (row.id === rowId) {
+          return {
+            ...row,
+            columns: row.columns.map((cell) =>
+              cell.id === cellId
+                ? {
+                    ...cell,
+                    content: (
+                      <button
+                        className={` bg-black rounded h-full w-full text-white rouneded py-2 px-4 cursor-pointer z-10 `}
+                      >
+                        Button
+                      </button>
+                    ),
+                    color: "black",
+                  }
+                : cell
+            ),
+          };
+        } else {
+          return row;
+        }
+      });
+    });
+  },
+  handleAddImage: (
+    setRows: Dispatch<SetStateAction<RowType[]>>,
+    rowId: string,
+    cellId: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file: any = event?.target?.files;
+    file &&
+      setRows((prev) => {
+        return prev.map((row) => {
+          if (row.id === rowId) {
+            return {
+              ...row,
+              columns: row.columns.map((cell) => {
+                if (cell.id === cellId) {
+                  return {
+                    ...cell,
+                    content: (
+                      <ImageComponent file={file[0]} cellStyle={cell.style} />
+                    ),
+                  };
+                } else return cell;
+              }),
+            };
+          } else {
+            return row;
+          }
+        });
+      });
+  },
 };
