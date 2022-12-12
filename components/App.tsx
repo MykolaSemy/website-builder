@@ -15,8 +15,6 @@ const App: React.FC<AppProps> = () => {
   });
   const [isSaving, setIsSaving] = useState(false);
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -48,7 +46,6 @@ const App: React.FC<AppProps> = () => {
     <div>
       <div className="w-full h-screen bg-white flex flex-col justify-start items-center">
         <button
-          ref={buttonRef}
           disabled={isSaving}
           onClick={onSave}
           className={`${
