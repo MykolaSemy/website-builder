@@ -1,4 +1,5 @@
-import {  useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { BiSave } from "react-icons/bi";
 import { ActiveCellType, RowType } from "../services/interfaces";
 import Panel from "./Panel";
 import RowsList from "./RowsList";
@@ -12,6 +13,32 @@ const App: React.FC<AppProps> = () => {
     row: "",
     cell: "",
   });
+  const [isSaving, setIsSaving] = useState(false);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch("/api/rows");
+        const data = await response.json();
+        setRows(JSON.parse(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  const onSave = () => {
+    setIsSaving(true);
+    fetch("/api/rows", {
+      method: "POST",
+      body: JSON.stringify(rows),
+    })
+      .then((response) => alert(response.statusText))
+      .finally(() => setIsSaving(false));
+  };
 
   const handleSelectActive = (rowId?: string, cellId?: string) => {
     setActiveCell({ row: rowId || "", cell: cellId || "" });
@@ -20,6 +47,16 @@ const App: React.FC<AppProps> = () => {
   return (
     <div>
       <div className="w-full h-screen bg-white flex flex-col justify-start items-center">
+        <button
+          ref={buttonRef}
+          disabled={isSaving}
+          onClick={onSave}
+          className={`${
+            isSaving && " animate-pulse "
+          } " flex justify-center items-center fixed left-5 top-5 cursor-pointer `}
+        >
+          <BiSave className="mx-2" />
+        </button>
         <Title />
         <Panel
           setRows={setRows}

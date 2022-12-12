@@ -36,6 +36,7 @@ export const handleDeleteCell = (
   setRows((prev) => {
     return prev.map((row) => {
       if (row.id === rowId) {
+        // URL.revokeObjectURL(row.)
         return {
           ...row,
           columns: row.columns.filter((cell) => cell.id !== cellId),
