@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { AiOutlineFileAdd, AiOutlineDelete } from "react-icons/ai";
 import { BiColorFill } from "react-icons/bi";
+import { GoTextSize } from "react-icons/go";
 import { BsFillMenuButtonFill } from "react-icons/bs";
 import { RowType, ActiveCellType } from "../services/interfaces";
 import {
@@ -38,10 +39,22 @@ const CellMenu: React.FC<CellMenuProps> = ({
         <AiOutlineDelete />
       </button>
       <button
-        onClick={() => handleAddButton(setRows, row, cell)}
+        onClick={() => {
+          handleAddButton(setRows, row, cell, textInputValue);
+          setTextInputValue("");
+        }}
         className="menu-button"
       >
         <BsFillMenuButtonFill />
+      </button>
+      <button
+        onClick={() => {
+          handleAddText(setRows, row, cell, textInputValue);
+          setTextInputValue("");
+        }}
+        className="menu-button"
+      >
+        <GoTextSize />
       </button>
       <button
         onClick={() => imgInputRef.current?.click()}
@@ -75,23 +88,14 @@ const CellMenu: React.FC<CellMenuProps> = ({
         />
       </button>
 
-      <div className="bg-slate-200 w-fit rounded-md p-4 flex justify-center items-center gap-4 h-14">
+      <div className="bg-slate-200 w-fit flex-col rounded-md px-2 flex justify-start items-center h-14">
+        <span className="text-sm opacity-40">Enter cell value below...</span>
         <input
-          className="h-full rounded w-36 outline-none p-4"
+          className="h-1/2 rounded w-36 outline-none p-4 mb-1 "
           type="text"
           value={textInputValue}
           onChange={(e) => setTextInputValue(e.target.value)}
         />
-
-        <button
-          className="h-full w-fit flex justify-around items-center whitespace-nowrap p-4 cursor-pointer rounded bg-slate-300 hover:bg-slate-400 duration-200 ease-in-out hover:text-white "
-          onClick={() => {
-            handleAddText(setRows, row, cell, textInputValue);
-            setTextInputValue("");
-          }}
-        >
-          Add title
-        </button>
       </div>
     </div>
   );

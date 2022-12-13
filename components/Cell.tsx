@@ -1,4 +1,5 @@
 import { CellType } from "../services/interfaces";
+import CellContent from "./CellContent";
 
 interface CellProps {
   cell: CellType;
@@ -18,9 +19,9 @@ const Cell: React.FC<CellProps> = ({ cell, rowId, handleSelectActive }) => {
         onSelectCell();
       }}
     >
-      <p className="flex items-center justify-center h-full text-3xl">
-        {cell.content}
-      </p>
+      <div className="flex items-center justify-center h-full ">
+        <CellContent cell={cell} />
+      </div>
     </div>
   );
 };

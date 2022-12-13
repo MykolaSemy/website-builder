@@ -6,14 +6,11 @@ export interface RowType {
 }
 export interface CellType {
   id: string;
+  contentType: "text" | "button" | "image" | "none";
   content: any;
   size: string;
   style: string;
   color: string;
-  // textSize:string;
-  // textColor:string;
-  // imageStyle:"cover"|"contain"
-  // buttonColor:""
 }
 export interface ActiveCellType {
   row: string;

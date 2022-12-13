@@ -1,5 +1,4 @@
 import { Dispatch, RefObject, SetStateAction } from "react";
-import ImageComponent from "../components/ImageComponent";
 import { RowType } from "../services/interfaces";
 import { getRandomId } from "./getRandomId";
 
@@ -20,6 +19,7 @@ export const handleAddCell = (
               size: "0",
               style: "",
               color: "white",
+              contentType: "none",
             },
           ],
         };
@@ -36,7 +36,6 @@ export const handleDeleteCell = (
   setRows((prev) => {
     return prev.map((row) => {
       if (row.id === rowId) {
-        // URL.revokeObjectURL(row.)
         return {
           ...row,
           columns: row.columns.filter((cell) => cell.id !== cellId),
@@ -109,7 +108,9 @@ export const addContentHandlers = {
           return {
             ...row,
             columns: row.columns.map((cell) =>
-              cell.id === cellId ? { ...cell, content: data } : cell
+              cell.id === cellId
+                ? { ...cell, contentType: "text", content: data }
+                : cell
             ),
           };
         } else {
@@ -121,7 +122,8 @@ export const addContentHandlers = {
   handleAddButton: (
     setRows: Dispatch<SetStateAction<RowType[]>>,
     rowId: string,
-    cellId: string
+    cellId: string,
+    buttonName: string
   ) => {
     setRows((prev) => {
       return prev.map((row) => {
@@ -132,14 +134,9 @@ export const addContentHandlers = {
               cell.id === cellId
                 ? {
                     ...cell,
-                    content: (
-                      <button
-                        className={` bg-black rounded h-full w-full text-white rouneded py-2 px-4 cursor-pointer z-10 `}
-                      >
-                        Button
-                      </button>
-                    ),
-                    color: "black",
+                    content: buttonName,
+                    contentType: "button",
+                    color: "green",
                   }
                 : cell
             ),
@@ -167,9 +164,8 @@ export const addContentHandlers = {
                 if (cell.id === cellId) {
                   return {
                     ...cell,
-                    content: (
-                      <ImageComponent file={file[0]} cellStyle={cell.style} />
-                    ),
+                    contentType: "image",
+                    content: URL.createObjectURL(file[0]),
                   };
                 } else return cell;
               }),
