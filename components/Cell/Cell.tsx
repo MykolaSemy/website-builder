@@ -1,4 +1,4 @@
-import { CellType } from "../services/interfaces";
+import { CellType } from "../../services/interfaces";
 import CellContent from "./CellContent";
 
 interface CellProps {

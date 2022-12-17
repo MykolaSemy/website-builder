@@ -3,12 +3,12 @@ import { AiOutlineFileAdd, AiOutlineDelete } from "react-icons/ai";
 import { BiColorFill } from "react-icons/bi";
 import { GoTextSize } from "react-icons/go";
 import { BsFillMenuButtonFill } from "react-icons/bs";
-import { RowType, ActiveCellType } from "../services/interfaces";
+import { RowType, ActiveCellType } from "../../services/interfaces";
 import {
   addContentHandlers,
   handleChangeCellColor,
   handleDeleteCell,
-} from "../utils/cellFunctions";
+} from "../../utils/cellFunctions";
 
 interface CellMenuProps {
   setRows: Dispatch<SetStateAction<RowType[]>>;

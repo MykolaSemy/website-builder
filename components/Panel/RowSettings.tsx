@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ActiveCellType, RowType } from "../services/interfaces";
+import { ActiveCellType, RowType } from "../../services/interfaces";
 import RowMenu from "./RowMenu";
 
 interface RowSettingsProps {

@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction, useRef } from "react";
 import { BiColorFill } from "react-icons/bi";
 import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl";
 import { RiDeleteBinFill } from "react-icons/ri";
-import { ActiveCellType, RowType } from "../services/interfaces";
-import { handleAddCell } from "../utils/cellFunctions";
+import { ActiveCellType, RowType } from "../../services/interfaces";
+import { handleAddCell } from "../../utils/cellFunctions";
 import {
   handleDeleteRow,
   handleChangeRowColor,
   handleChangeRowGap,
-} from "../utils/rowFunctions";
+} from "../../utils/rowFunctions";
 import { GrChapterAdd } from "react-icons/gr";
 
 interface RowMenuProps {

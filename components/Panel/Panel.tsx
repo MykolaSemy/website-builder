@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { ActiveCellType, RowType } from "../services/interfaces";
-import { handleAddRow } from "../utils/rowFunctions";
+import { ActiveCellType, RowType } from "../../services/interfaces";
+import { handleAddRow } from "../../utils/rowFunctions";
 import CellSettings from "./CellSettings";
 import RowSettings from "./RowSettings";
 

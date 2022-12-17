@@ -1,4 +1,4 @@
-import { RowType } from "../services/interfaces";
+import { RowType } from "../../services/interfaces";
 import Row from "./Row";
 
 interface RowsListProps {

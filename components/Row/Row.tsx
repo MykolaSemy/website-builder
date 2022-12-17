@@ -1,5 +1,5 @@
-import { RowType } from "../services/interfaces";
-import Cell from "./Cell";
+import { RowType } from "../../services/interfaces";
+import Cell from "../Cell/Cell";
 
 interface RowProps {
   rowData: RowType;
@@ -16,9 +16,7 @@ const Row: React.FC<RowProps> = ({ rowData, handleSelectActive }) => {
         gridTemplateColumns: ` repeat(${columns.length}, minmax(0, 1fr)) `,
         background: color,
       }}
-      onClick={(e) => {
-        handleSelectActive(rowData.id);
-      }}
+      onClick={() => handleSelectActive(rowData.id)}
       className="cursor-pointer grid-rows-1 grid-flow-row grid w-3/4  group shadow-md h-24 rounded my-1 relative"
     >
       {!!!columns.length && (

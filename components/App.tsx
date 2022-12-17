@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { BiSave } from "react-icons/bi";
 import { ActiveCellType, RowType } from "../services/interfaces";
-import Panel from "./Panel";
-import RowsList from "./RowsList";
+import Panel from "./Panel/Panel";
+import RowsList from "./Row/RowsList";
 import Title from "./Title";
 
 interface AppProps {}
@@ -52,7 +52,7 @@ const App: React.FC<AppProps> = () => {
             isSaving && " animate-pulse "
           } " flex justify-center items-center fixed left-5 top-5 cursor-pointer `}
         >
-          <BiSave className="mx-2" />
+          <BiSave className="mx-2 " />
         </button>
         <Title />
         <Panel
