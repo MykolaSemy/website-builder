@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { BiSave } from "react-icons/bi";
 import { ActiveCellType, RowType } from "../services/interfaces";
-import Panel from "./Panel/Panel";
-import RowsList from "./Row/RowsList";
+import Panel from "./panel/Panel";
+import RowsList from "./row/RowsList";
 import Title from "./Title";
 
 interface AppProps {}

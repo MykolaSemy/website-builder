@@ -1,5 +1,5 @@
 import { RowType } from "../../services/interfaces";
-import Cell from "../Cell/Cell";
+import Cell from "../cell/Cell";
 
 interface RowProps {
   rowData: RowType;
